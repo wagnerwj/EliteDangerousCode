@@ -14,7 +14,18 @@ public class EDSystem implements Comparable<EDSystem>{
   
   private Map<String, Object> eddbData;
   
-  private long calcSystemIncome=0l;
+  private String controllingSystem;
+  public String getControllingSystem() {
+	return controllingSystem;
+}
+
+public void setControllingSystem(String controllingSystem) {
+	this.controllingSystem = controllingSystem;
+}
+
+private long controlSphereIncome=0l;
+  
+  private long systemCCIncome;
   
   private long upkeep;
 
@@ -80,6 +91,12 @@ public void setEddbData(Map<String, Object> eddbData) {
 	this.eddbData = eddbData;
 	this.setName((String)eddbData.get("name"));
 	this.setCoords(((Number)eddbData.get("x")).doubleValue(), ((Number)eddbData.get("y")).doubleValue(), ((Number)eddbData.get("z")).doubleValue());
+	try {
+		this.systemCCIncome = (long) Math.max(Math.round(Math.log10( ((Number)eddbData.get("population")).longValue()*10l)),0l);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		this.systemCCIncome=0l;
+	}
 }
 
 public Object getEddbDataEntry(String key){
@@ -100,25 +117,20 @@ public List<String> getControlSphere(){
 	return controlSphere;
 }
 
-public Long systemCCIncome(){
-	try {
-		return (long) Math.max(Math.round(Math.log10( ((Number)eddbData.get("population")).longValue()*10l)),0l);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		return 0l;
-	}
+public Long getSystemCCIncome(){
+	return this.systemCCIncome;
 }
 
-public long getCalcSystemIncome() {
-	return calcSystemIncome;
+public long getControlSphereIncome() {
+	return controlSphereIncome;
 }
 
-public void setCalcSystemIncome(long calcSystemIncome) {
-	this.calcSystemIncome = calcSystemIncome;
+public void setControlSphereIncome(long calcSystemIncome) {
+	this.controlSphereIncome = calcSystemIncome;
 }
 
 public void addIncomeToSphere(long income){
-	this.calcSystemIncome+= income;
+	this.controlSphereIncome+= income;
 }
 
 public long getUpkeep() {
@@ -131,9 +143,9 @@ public void setUpkeep(long upkeep) {
 
 @Override
 public int compareTo(EDSystem o) {
-	if(calcSystemIncome> o.calcSystemIncome)
+	if(controlSphereIncome> o.controlSphereIncome)
 		return 1;
-	if(calcSystemIncome< o.calcSystemIncome)
+	if(controlSphereIncome< o.controlSphereIncome)
 		return -1;
 	return 0;
 }

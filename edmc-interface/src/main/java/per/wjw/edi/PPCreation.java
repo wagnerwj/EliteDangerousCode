@@ -72,7 +72,7 @@ public class PPCreation {
 			EDSystem workingSystem = systemList.get(key);
 			if(PPCreation.synteiniDist(workingSystem.getX(), workingSystem.getY(), workingSystem.getZ())<=150){
 			System.out.println("Working "+key);
-			workingSystem.addIncomeToSphere(workingSystem.systemCCIncome());
+			workingSystem.addIncomeToSphere(workingSystem.getSystemCCIncome());
 			for(String innnerKey:systemList.keySet()){
 				if(!key.equalsIgnoreCase(innnerKey) &&workingSystem.getAdjacentSystem(innnerKey)==null){
 				EDSystem nextNeighbor = systemList.get(innnerKey);
@@ -91,19 +91,21 @@ public class PPCreation {
 		List<EDSystem> priorityList = new ArrayList<>();
 		for(String key:systemList.keySet()){
 			EDSystem workingSystem = systemList.get(key);
-			long controlIncome =workingSystem.systemCCIncome();
+			long controlIncome =workingSystem.getSystemCCIncome();
 			List<String> sphere= workingSystem.getControlSphere();
 
 			if(sphere!=null && sphere.size()>0)
 				for(String exploitedSystem:sphere){
-					controlIncome += systemList.get(exploitedSystem).systemCCIncome();
+					controlIncome += systemList.get(exploitedSystem).getSystemCCIncome();
 				}
-			workingSystem.setCalcSystemIncome(controlIncome);
+			if(controlIncome>81){
+			workingSystem.setControlSphereIncome(controlIncome);
 			priorityList.add(workingSystem);
+			}
 		}
 		Collections.sort(priorityList);
 		for(EDSystem system:priorityList){
-			System.out.println(system.getName()+" "+estUpkeep(system)+" "+system.getCalcSystemIncome());
+			System.out.println(system.getName()+" "+estUpkeep(system)+" "+system.getControlSphereIncome());
 			
 		}
 
