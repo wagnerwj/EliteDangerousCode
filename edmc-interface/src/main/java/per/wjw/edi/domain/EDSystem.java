@@ -1,4 +1,4 @@
-package per.wjw.edi;
+package per.wjw.edi.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;

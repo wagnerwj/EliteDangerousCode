@@ -34,8 +34,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import per.wjw.edi.EDSystem;
 import per.wjw.edi.PPCreation;
+import per.wjw.edi.domain.EDSystem;
 
 public class EDPPAnalysisService extends EliteDangerousService {
 	

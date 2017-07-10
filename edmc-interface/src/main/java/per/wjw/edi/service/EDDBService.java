@@ -29,7 +29,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import per.wjw.edi.EDSystem;
+import per.wjw.edi.domain.EDSystem;
 
 public class EDDBService extends EliteDangerousService {
 
@@ -105,6 +105,8 @@ public void updateStationData(){
 public static void main(String[] args){
 	EDDBService eddbService = new EDDBService();
 	eddbService.updateSystemData();
+	eddbService.updateFactionData();
+	eddbService.updateStationData();
 }
 
 }
