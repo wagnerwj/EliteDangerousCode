@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import per.wjw.edi.domain.EDFaction;
+import per.wjw.edi.domain.model.EDSystemView;
 
 public class EDPlanetService extends EliteDangerousService {
 	
@@ -50,5 +51,9 @@ public class EDPlanetService extends EliteDangerousService {
 		return faction;
 	}
 	
+	public EDSystemView getEDSystem(){
+		return null;
+	}
 
+	
 }
