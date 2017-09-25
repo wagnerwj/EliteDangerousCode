@@ -20,7 +20,7 @@ public class DijkstraAlgorithm {
     private Set<Vertex> settledNodes;
     private Set<Vertex> unSettledNodes;
     private Map<Vertex, Vertex> predecessors;
-    private Map<Vertex, Integer> distance;
+    private Map<Vertex, Double> distance;
 
     public DijkstraAlgorithm(Graph graph) {
         // create a copy of the array so that we can operate on this array
@@ -31,9 +31,9 @@ public class DijkstraAlgorithm {
     public void execute(Vertex source) {
         settledNodes = new HashSet<Vertex>();
         unSettledNodes = new HashSet<Vertex>();
-        distance = new HashMap<Vertex, Integer>();
+        distance = new HashMap<Vertex, Double>();
         predecessors = new HashMap<Vertex, Vertex>();
-        distance.put(source, 0);
+        distance.put(source, 0.0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
             Vertex node = getMinimum(unSettledNodes);
@@ -57,7 +57,7 @@ public class DijkstraAlgorithm {
 
     }
 
-    private int getDistance(Vertex node, Vertex target) {
+    private Double getDistance(Vertex node, Vertex target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target)) {
@@ -96,10 +96,10 @@ public class DijkstraAlgorithm {
         return settledNodes.contains(vertex);
     }
 
-    private int getShortestDistance(Vertex destination) {
-        Integer d = distance.get(destination);
+    private Double getShortestDistance(Vertex destination) {
+        Double d = distance.get(destination);
         if (d == null) {
-            return Integer.MAX_VALUE;
+            return Double.MAX_VALUE;
         } else {
             return d;
         }

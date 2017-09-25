@@ -60,6 +60,7 @@ public class EDDBService extends EliteDangerousService {
 			e.printStackTrace();
 		} 
 		transportClient.admin().indices().prepareCreate(indexName).get();
+		
 		List<Map<String, Object>> dataList = (List<Map<String, Object>> )mapper.readValue(buff.toString(), new TypeReference<List<Map<String,Object>>>() { });
 	    BulkRequestBuilder bulkRequestBuilder = transportClient.prepareBulk();
 	    for (Map<String,Object> data : dataList) {

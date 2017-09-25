@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +25,11 @@ import org.elasticsearch.client.RestClient;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import per.wjw.edi.domain.EDSystem;
+import per.wjw.edi.domain.Edge;
+import per.wjw.edi.domain.Graph;
+import per.wjw.edi.domain.Vertex;
 
 public class ShortestPath {
 	List<EDSystem> systems;
@@ -37,6 +42,9 @@ public class ShortestPath {
 	String visitList = "";
 	private Double workingDistance = 0.0;
 	private String workingList = "";
+	public Graph g;
+	public Vertex startVert;
+	public Vertex targetVert;
 	
 	public void populateData() {
 		systems = new ArrayList<>();
@@ -48,7 +56,7 @@ public class ShortestPath {
 		getURI.setEntity(new ByteArrayEntity(queryString.getBytes()));
 		
 		try {
-			
+			Map<String, Vertex> vertices = new HashMap<>();
 			HttpResponse response = client.execute(getURI);
 			HttpEntity entity = response.getEntity();
 			
@@ -68,22 +76,30 @@ public class ShortestPath {
 				EDSystem newSystem = new EDSystem();
 				newSystem.setEddbData(source);
 				systems.add(newSystem);
+				Vertex vertex = new Vertex(newSystem.getName(), newSystem.getName());
+				if(vertex.getName().equals(start))
+					startVert = vertex;
+				if(vertex.getName().equals(end))
+					targetVert = vertex;
+				vertices.put(newSystem.getName(), vertex);
 			}
+
+			List<Edge> edges = new ArrayList<>();
 			distanceList = new HashMap<>();
-			for(EDSystem startSystem: systems) {
-				Map<String, Double> adjList = distanceList.get(startSystem.getName());
-				if(adjList == null) {
-					adjList = new HashMap<>();
-					distanceList.put(startSystem.getName(), adjList);
-					for(EDSystem targetSystem: systems) {
-						if(!startSystem.getName().equals(targetSystem.getName())) {
-							adjList.put(targetSystem.getName(), startSystem.adjacentDistance(targetSystem));
+			for(EDSystem startSystem:systems) {
+					String startName = startSystem.getName();
+
+					for(EDSystem targetSystem:systems) {
+						String targetName = targetSystem.getName();
+						if(!startName.equals(targetName)) {
+							
+							Edge edge = new Edge(startName+targetName, vertices.get(startName), vertices.get(targetName), startSystem.adjacentDistance(targetSystem));
+							edges.add(edge);
 						}
 					}
-				}
 			}
-	
-
+			
+			g = new Graph(new ArrayList<>(vertices.values()), edges);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -128,8 +144,11 @@ public class ShortestPath {
 	public static void main(String[] args) {
 		ShortestPath path = new ShortestPath();
 		path.populateData();
-		path.visit(path.start);
-		path.printResults();
+DijkstraAlgorithm alg = new DijkstraAlgorithm(path.g);
+alg.execute(path.startVert);
+LinkedList<Vertex> sortedPath = alg.getPath(path.targetVert);
+for(Vertex vert: sortedPath)
+	System.out.println(vert.getName());
 	}
 
 }

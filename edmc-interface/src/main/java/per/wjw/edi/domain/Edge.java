@@ -1,12 +1,12 @@
 package per.wjw.edi.domain;
 
-public class Edge  {
+public class Edge  implements Comparable<Edge>{
     private final String id;
     private final Vertex source;
     private final Vertex destination;
-    private final int weight;
+    private final Double weight;
 
-    public Edge(String id, Vertex source, Vertex destination, int weight) {
+    public Edge(String id, Vertex source, Vertex destination, Double weight) {
         this.id = id;
         this.source = source;
         this.destination = destination;
@@ -23,7 +23,7 @@ public class Edge  {
     public Vertex getSource() {
         return source;
     }
-    public int getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
@@ -31,6 +31,12 @@ public class Edge  {
     public String toString() {
         return source + " " + destination;
     }
+
+	@Override
+	public int compareTo(Edge o) {
+		
+		return this.weight.compareTo(o.weight);
+	}
 
 
 }

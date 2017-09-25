@@ -1,0 +1,182 @@
+{
+  "populated_systems" : {
+    "mappings" : {
+      "record" : {
+        "properties" : {
+          "allegiance" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "allegiance_id" : {
+            "type" : "long"
+          },
+          "controlling_minor_faction" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "controlling_minor_faction_id" : {
+            "type" : "long"
+          },
+          "edsm_id" : {
+            "type" : "long"
+          },
+          "government" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "government_id" : {
+            "type" : "long"
+          },
+          "id" : {
+            "type" : "long"
+          },
+          "is_populated" : {
+            "type" : "boolean"
+          },
+          "minor_faction_presences" : {
+            "properties" : {
+              "influence" : {
+                "type" : "float"
+              },
+              "minor_faction_id" : {
+                "type" : "long"
+              },
+              "state" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "state_id" : {
+                "type" : "long"
+              }
+            }
+          },
+          "name" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "needs_permit" : {
+            "type" : "boolean"
+          },
+          "population" : {
+            "type" : "long"
+          },
+          "power" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "power_state" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "power_state_id" : {
+            "type" : "long"
+          },
+          "primary_economy" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "primary_economy_id" : {
+            "type" : "long"
+          },
+          "reserve_type" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "reserve_type_id" : {
+            "type" : "long"
+          },
+          "security" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "security_id" : {
+            "type" : "long"
+          },
+          "simbad_ref" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "state" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "state_id" : {
+            "type" : "long"
+          },
+          "updated_at" : {
+            "type" : "long"
+          },
+          "x" : {
+            "type" : "float"
+          },
+          "y" : {
+            "type" : "float"
+          },
+          "z" : {
+            "type" : "float"
+          }
+        }
+      }
+    }
+  }
+}
