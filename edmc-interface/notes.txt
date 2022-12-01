@@ -1,0 +1,2 @@
+1) Spring boot app for feed
+2) Check out EDMC plugin ui stuff- work on that rather than  feed?
